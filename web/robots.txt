@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /payment/paypal
+Disallow: /admin/

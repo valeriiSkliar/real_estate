@@ -1,0 +1,19 @@
+// Using @import for Bootstrap 4.5.0 compatibility
+// These warnings can be ignored as they don't affect functionality
+// @import "../../vendor/bootstrap/scss/bootstrap/functions";
+// @import "../../vendor/npm-asset/bootstrap/scss/bootstrap/variables";
+// @import "../../vendor/bootstrap/scss/bootstrap/mixins";
+
+// Use the modern @use directive instead of @import
+@import "fonts";
+@import "custom-variables";
+@import "theme-variables";
+// @import "dropdown-examples"; // custom dropdown styles
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "components";
+@import "search-widget";
+@import "sort-dropdown";
+@import "property-card";
+@import "my-properties"; 
+
+// Other custom css

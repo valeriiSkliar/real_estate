@@ -1,0 +1,94 @@
+// Search Widget Styles
+.property-search-form {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  
+  .search-main-wrapper {
+    padding: 0;
+    background-color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    
+    &:hover, &:focus-within {
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .row {
+      margin: 0;
+      
+      .col-10 {
+        border: 1px solid #e5e5e5;
+        .input-group {
+          height: 100%;
+          
+          .form-control {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            background-color: #fff;
+            
+            &:focus {
+              box-shadow: none;
+              outline: none;
+            }
+            
+            &::placeholder {
+              color: #adb5bd;
+              font-weight: 300;
+            }
+          }
+        }
+      }
+      
+      .col-2 {
+        padding-right: 0;
+        
+        .btn {
+          height: 100%;
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid $primary;
+          transition: all 0.3s ease;
+          
+          i {
+            font-size: 1.2rem;
+          }
+          
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Media queries for responsive design
+@media (max-width: 768px) {
+  .property-search-form {
+    .search-main-wrapper {
+      width: 100%;
+    }
+  }
+}
+
+// // Animation for focus state
+// @keyframes pulse {
+//   0% {
+//     box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4);
+//   }
+//   70% {
+//     box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+//   }
+//   100% {
+//     box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+//   }
+// }
+
+// .property-search-form .search-main-wrapper:focus-within {
+//   animation: pulse 1.5s infinite;
+// }

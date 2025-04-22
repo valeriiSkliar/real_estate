@@ -1,0 +1,440 @@
+// Mobile Advertisements Styles
+
+// Variables
+$mobile-header-height: 56px;
+$mobile-action-bar-height: 76px;
+
+// Mobile Header
+.mobile-header {
+  height: $mobile-header-height;
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+  z-index: 1030;
+  display: flex;
+  align-items: center;
+  
+  h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .btn-back {
+    margin-right: 1rem;
+    color: $primary;
+    
+    i {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Action Bar
+.action-bar {
+  height: $mobile-action-bar-height;
+  background-color: #fff;
+  border-top: 1px solid #dee2e6;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1020;
+  padding: 15px;
+  
+  .btn {
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    
+    i {
+      margin-right: 8px;
+    }
+  }
+}
+
+// Content spacing to avoid overlap with action bar
+.content-with-action-bar {
+  margin-bottom: $mobile-action-bar-height + 20px;
+}
+
+// Card styles
+.mobile-advertisement-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover, &:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 5px 10px;
+    }
+    
+    .image-counter {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border-radius: 12px;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+    }
+  }
+  
+  .card-body {
+    padding: 15px;
+    
+    .price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .address {
+      color: #666;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .details {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      
+      .detail-item {
+        display: flex;
+        align-items: center;
+        color: #666;
+        font-size: 0.85rem;
+        
+        i {
+          margin-right: 5px;
+          color: #999;
+        }
+      }
+    }
+  }
+}
+
+// Form Styles
+.form-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+  padding: 15px;
+  
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+    
+    i {
+      margin-right: 8px;
+      color: $primary;
+      font-size: 1rem;
+    }
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    
+    label {
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+    
+    .form-control {
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      height: auto;
+      
+      &:focus {
+        border-color: rgba($primary, 0.5);
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+      }
+      
+      &.is-invalid {
+        border-color: $danger;
+        
+        &:focus {
+          box-shadow: 0 0 0 3px rgba($danger, 0.1);
+        }
+      }
+    }
+    
+    select.form-control {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+      background-position: right 15px center;
+      background-repeat: no-repeat;
+      background-size: 10px 10px;
+      padding-right: 40px;
+      appearance: none;
+    }
+    
+    textarea.form-control {
+      min-height: 100px;
+    }
+    
+    .invalid-feedback {
+      margin-top: 5px;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// Image upload preview
+.image-upload-container {
+  margin-top: 15px;
+  
+  .image-preview-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .image-delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #dc3545;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    
+    &:hover {
+      background-color: white;
+    }
+  }
+  
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    
+    .btn-upload {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 12px;
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+      color: #666;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      
+      i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+      
+      &:hover {
+        border-color: $primary;
+        color: $primary;
+        background-color: rgba($primary, 0.05);
+      }
+    }
+    
+    input[type=file] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+}
+
+// Carousel for property images
+.property-carousel {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+  .carousel-item {
+    height: 300px;
+    
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .carousel-indicators {
+    margin-bottom: 10px;
+    
+    li {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin: 0 4px;
+    }
+  }
+  
+  .carousel-control-prev, .carousel-control-next {
+    width: 15%;
+    opacity: 0.7;
+  }
+}
+
+// Property detail styles
+.property-detail {
+  .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .address {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  .badge-container {
+    margin-bottom: 15px;
+    
+    .badge {
+      margin-right: 5px;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+  }
+  
+  .property-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      color: #555;
+      
+      i {
+        margin-right: 8px;
+        color: $primary;
+        font-size: 1.1rem;
+      }
+    }
+  }
+  
+  .description {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #444;
+  }
+  
+  .contact-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    
+    .title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .phone {
+      display: flex;
+      align-items: center;
+      
+      i {
+        margin-right: 10px;
+        color: $success;
+        font-size: 1.1rem;
+      }
+      
+      a {
+        color: $primary;
+        font-weight: 500;
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767.98px) {
+  .property-carousel .carousel-item {
+    height: 250px;
+  }
+  
+  .form-section {
+    padding: 12px;
+  }
+  
+  .property-detail .price {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .property-carousel .carousel-item {
+    height: 200px;
+  }
+  
+  .mobile-advertisement-card .card-image {
+    height: 180px;
+  }
+}

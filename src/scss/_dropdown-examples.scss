@@ -1,0 +1,76 @@
+// Custom styles for dropdown examples using variables from _custom-variables.scss
+@import  "_custom-variables";
+// @import  "sass:color";
+// @import  "sass:map";
+
+// Custom dropdown button
+.custom-dropdown-btn {
+  background-color: $green-1;
+  color: $heading-color;
+  font-family: $font_family_primary;
+  box-shadow: $box-shadow-xs-2;
+  
+  &:hover, &:focus {
+    background-color: darken($green-1, 5%);
+    box-shadow: $box-shadow-xs-3;
+  }
+}
+
+// Custom dropdown menu
+.custom-dropdown-menu {
+  border-radius: 4px;
+  box-shadow: $box-shadow-xs-4;
+  border: 1px solid $lighter;
+}
+
+// Custom form elements
+.custom-form {
+  .custom-label {
+    color: $heading-color;
+    font-weight: $font-weight-500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .custom-input {
+    border-color: $gray-lighter;
+    
+    &:focus {
+      border-color: $gray;
+      box-shadow: $box-shadow-xxs-1;
+    }
+  }
+  
+  .custom-checkbox {
+    &:checked {
+      background-color: $green-1;
+    }
+  }
+  
+  .custom-check-label {
+    color: $gray;
+    font-size: map-get($font-sises, '14');
+  }
+  
+  .custom-submit-btn {
+    background-color: $heading-color;
+    border: none;
+    padding: 8px 16px;
+    box-shadow: $box-shadow-xs-1;
+    
+    &:hover {
+      background-color: darken($heading-color, 10%);
+      box-shadow: $box-shadow-xs-2;
+    }
+  }
+}
+
+// Custom links
+.custom-link {
+  color: $gray;
+  font-size: map-get($font-sises, '14');
+  
+  &:hover {
+    color: $heading-color;
+    text-decoration: none;
+  }
+}
