@@ -42,29 +42,20 @@ use yii\helpers\Html;
                                 'id' => 'deal-type-rent',
                                 'class' => 'tab-input',
                             ]) ?>
-                            <?= Html::label('Снять', 'deal-type-rent', ['class' => 'tab-label mb-0']) ?>
+                            <?= Html::label('Аренда', 'deal-type-rent', ['class' => 'tab-label mb-0']) ?>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Срок аренды -->
                 <div class="rent-period-tabs">
                     <div class="tab-group">
                         <div class="tab-item active">
-                            <?= Html::radio('rent_period', true, [
-                                'value' => 'long',
-                                'id' => 'rent-period-long',
+                            <?= Html::checkbox('new_for_today', false, [
+                                'value' => 'false',
+                                'id' => 'new-for-today',
                                 'class' => 'tab-input',
                             ]) ?>
-                            <?= Html::label('Надолго', 'rent-period-long', ['class' => 'tab-label mb-0']) ?>
-                        </div>
-                        <div class="tab-item">
-                            <?= Html::radio('rent_period', false, [
-                                'value' => 'daily',
-                                'id' => 'rent-period-daily',
-                                'class' => 'tab-input',
-                            ]) ?>
-                            <?= Html::label('Посуточно', 'rent-period-daily', ['class' => 'tab-label mb-0']) ?>
+                            <?= Html::label('Новое за сегодня', 'new-for-today', ['class' => 'tab-label mb-0']) ?>
                         </div>
                     </div>
                 </div>
@@ -73,6 +64,10 @@ use yii\helpers\Html;
                 <div class="form-group">
                     <?= Html::dropDownList('property_type', null, [
                         'apartment' => 'Квартиру',
+                        'house' => 'Дом',
+                        'commercial' => 'Коммерция',
+                        'land' => 'Участок',
+                        'other' => 'Другое'
                     ], ['class' => 'form-control']) ?>
                     <i class="fa fa-chevron-down dropdown-icon"></i>
                 </div>

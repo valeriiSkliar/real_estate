@@ -99,7 +99,7 @@ module.exports = function initSortBtn() {
       const newUrl = window.location.pathname + '?' + urlParams.toString();
       window.history.replaceState({}, '', newUrl);
       
-      // In a real implementation, you would reload the data here with AJAX
+      //TODO In a real implementation, you would reload the data here with AJAX
       // This would prevent a full page reload and maintain all filters
       console.log('Sorting by ' + field + ' in ' + direction + ' order');
   }

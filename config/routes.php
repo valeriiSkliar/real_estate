@@ -12,9 +12,15 @@ return [
     '/' => 'frontend/site/index',
     'test' => 'frontend/site/test',
     'error' => 'frontend/site/error',
+
+    // Favorites and Collections routes
     'favorites' => 'frontend/favorites/index',
+    'collections' => 'frontend/favorites/collections',
     'favorites/add' => 'frontend/favorites/add',
     'favorites/remove' => 'frontend/favorites/remove',
+
+    // AJAX routes for favorites and collections
+    'favorites/create-collection-ajax' => 'frontend/favorites/create-collection-ajax',
 
     // my properties routes
     'my-properties' => 'frontend/my-properties/index',

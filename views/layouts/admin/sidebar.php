@@ -68,10 +68,11 @@
                             ['label' => 'Поддержка', 'icon' => 'fa fa-ambulance', 'url' => ['/admin/support-messages/index'], 'active' => $this->context->id == 'admin/support-messages'],
 //                            ['label' => 'Рассылки', 'icon' => 'fa fa-paper-plane', 'url' => ['/admin/sends/index'], 'active' => $this->context->id == 'admin/sends'],
                         ]],
-//                        ['label' => 'Общее', 'icon' => 'folder', 'items' => [
+                        ['label' => 'Общее', 'icon' => 'folder', 'items' => [
 //                            ['label' => 'Страницы', 'icon' => 'fa fa-book', 'url' => ['/admin/pages/index'], 'active' => $this->context->id == 'admin/pages'],
 //                            ['label' => 'Рассылки', 'icon' => 'fa fa-paper-plane', 'url' => ['/admin/sends/index'], 'active' => $this->context->id == 'admin/sends'],
-//                        ]],
+                            ['label' => 'Настройки', 'icon' => 'fa fa-cogs', 'url' => ['/admin/settings/index'], 'active' => $this->context->id == 'admin/settings'],
+                        ]],
 //                        ['label' => 'Мультиязычность', 'icon' => 'folder', 'items' => [
 //                            ['label' => 'Сайт', 'icon' => 'fa fa-globe', 'url' => ['/admin/frontend-translation/index'], 'active' => $this->context->id == 'admin/frontend-translation'],
 //                            ['label' => 'Языки', 'icon' => 'fa fa-language', 'url' => ['/admin/languages/index'], 'active' => $this->context->id == 'admin/languages'],

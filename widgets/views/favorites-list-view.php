@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Представление для виджета списка избранного
  * 
@@ -18,13 +19,14 @@ use yii\helpers\Url;
 // Получаем модели для текущей страницы
 $models = $dataProvider->getModels();
 $pagination = $dataProvider->getPagination();
+$sort = $dataProvider->getSort(); // Получаем объект сортировки
 ?>
 
 <div <?= Html::renderTagAttributes($options) ?>>
     <?php if ($showTitle): ?>
         <h2 class="h4 mb-4"><?= Html::encode($title) ?></h2>
     <?php endif; ?>
-    
+
     <?php if (empty($models)): ?>
         <div class="empty-favorites-message text-center py-5">
             <i class="fas fa-heart text-muted" style="font-size: 48px;"></i>
@@ -33,6 +35,47 @@ $pagination = $dataProvider->getPagination();
             <a href="<?= Url::to(['/']) ?>" class="btn btn-primary">Перейти к поиску объявлений</a>
         </div>
     <?php else: ?>
+        <!-- Добавляем кнопку сортировки -->
+        <div class="d-flex justify-content-end mb-3">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-sort me-1 sort-icon"></i> <!-- Иконка для наглядности -->
+                    Сортировка:
+                    <?php
+                    // Отображаем текущую активную сортировку
+                    $currentOrderLabel = 'По умолчанию'; // Текст по умолчанию
+                    $currentOrder = $sort->orders;
+                    if (!empty($currentOrder)) {
+                        $keys = array_keys($currentOrder);
+                        $attribute = reset($keys);
+                        $direction = $currentOrder[$attribute];
+                        // Можно добавить маппинг атрибутов на человекочитаемые названия
+                        $attributeLabel = $sort->attributes[$attribute]['label'] ?? ucfirst($attribute);
+                        $directionLabel = $direction === SORT_ASC ? ' (возр.)' : ' (убыв.)';
+                        $currentOrderLabel = $attributeLabel . $directionLabel;
+                    }
+                    echo Html::encode($currentOrderLabel);
+                    ?>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                    <?php
+                    // Генерируем ссылки для сортировки
+                    // Параметр 'id' не добавлен, т.к. он нелогичен для пользовательской сортировки
+                    $sortAttributes = ['price', 'title']; // Атрибуты из виджета для сортировки
+                    foreach ($sortAttributes as $attribute):
+                        $attributeLabel = $sort->attributes[$attribute]['label'] ?? ucfirst($attribute);
+                    ?>
+                        <li><?= $sort->link($attribute, ['class' => 'dropdown-item sort-option', 'data-sort' => $attribute]) ?></li>
+                    <?php endforeach; ?>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item sort-option" href="<?= Url::current([$sort->sortParam => null]) ?>">Сбросить сортировку</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Конец кнопки сортировки -->
+
         <div class="property-grid" id="favorites-grid">
             <?php foreach ($models as $property): ?>
                 <div class="favorite-item" data-property-id="<?= $property['id'] ?>">
@@ -50,7 +93,7 @@ $pagination = $dataProvider->getPagination();
                         <div class="card-footer">
                             <div class="action-buttons">
                                 <a href="<?= $property['detailUrl'] ?>" class="btn-link btn btn-primary" title="Подробнее">
-                                Фото и подробности
+                                    Фото и подробности
                                 </a>
 
                                 <?= app\widgets\FavoriteButtonWidget::widget([
@@ -59,7 +102,7 @@ $pagination = $dataProvider->getPagination();
                                     'buttonClass' => 'btn-icon favorite-toggle-btn',
                                     'removeTitle' => 'Удалить из избранного',
                                 ]) ?>
-                                
+
                                 <button type="button" class="btn-icon info-btn" title="Пожаловаться">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-warning-icon lucide-message-circle-warning">
                                         <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />

@@ -3,17 +3,22 @@
 namespace app\controllers\frontend;
 
 use app\models\Favorites;
+use app\models\Selections;
 use Yii;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
+use yii\web\Controller;
+use app\widgets\FavoritesListWidget;
+use yii\helpers\Url;
+use yii\web\BadRequestHttpException;
+use yii\filters\AccessControl;
 
 /**
  * FavoritesController implements the CRUD actions for Favorites model.
  */
 class FavoritesController extends FrontendController
 {
-    public $layout = 'frontend/main';
     /**
      * {@inheritdoc}
      */
@@ -25,23 +30,39 @@ class FavoritesController extends FrontendController
                 'actions' => [
                     'add' => ['post'],
                     'remove' => ['post', 'delete'],
+                    'create-collection-ajax' => ['post'],
                 ],
             ],
         ];
     }
 
     /**
-     * Lists all user's favorite advertisements
-     * @return mixed
+     * Displays the favorites page.
+     * @return string
      */
     public function actionIndex()
     {
-        // В реальной системе, здесь бы использовалась модель с пагинацией
-        // и получением данных из БД для конкретного пользователя
-        $favorites = []; // Временно пустой массив, позже будет заменен на реальные данные
+        // Здесь будет логика получения данных для виджета FavoritesListWidget
+        // $dataProvider = new ActiveDataProvider([...]); // Пример для реальных данных
 
         return $this->render('index', [
-            'favorites' => $favorites
+            'activeTab' => 'favorites', // Указываем активную вкладку
+            // 'dataProvider' => $dataProvider, // Передаем провайдер, если виджет не будет получать данные сам
+        ]);
+    }
+
+    /**
+     * Displays the collections page.
+     * @return string
+     */
+    public function actionCollections()
+    {
+        // Здесь будет логика получения данных для виджета CollectionsListWidget
+        // $dataProvider = new ActiveDataProvider([...]); // Пример для реальных данных
+
+        return $this->render('index', [ // Рендерим то же представление
+            'activeTab' => 'collections', // Указываем активную вкладку
+            // 'dataProvider' => $dataProvider, // Передаем провайдер, если виджет не будет получать данные сам
         ]);
     }
 
@@ -105,5 +126,66 @@ class FavoritesController extends FrontendController
                 'propertyId' => $advertisementId,
             ],
         ];
+    }
+
+    /**
+     * Creates a new Selections model via AJAX.
+     * Expects POST request with 'Selections[name]'.
+     * Returns JSON response: {success: boolean, redirectUrl?: string, errors?: array}
+     * @return array
+     * @throws BadRequestHttpException if the request is not POST or not AJAX
+     * @throws ForbiddenHttpException if the user is not logged in
+     */
+    public function actionCreateCollectionAjax()
+    {
+        Yii::error('Create collection AJAX request received');
+
+        if (!Yii::$app->request->isPost || !Yii::$app->request->isAjax) {
+            throw new BadRequestHttpException('Invalid request method or type.');
+        }
+        // Проверка авторизации уже сделана через AccessControl
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $model = new Selections();
+
+        $model->user_id = Yii::$app->user->id; // Устанавливаем ID пользователя
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate(['name'])) {
+            if ($model->save(false)) { // save(false) чтобы не запускать валидацию еще раз
+                // Используем Url::to для генерации URL для фронтенда
+                $redirectUrl = Url::to(['/favorites/view-collection', 'id' => $model->id]);
+                return ['success' => true, 'redirectUrl' => $redirectUrl];
+            } else {
+                // Ошибки сохранения (маловероятно при save(false) после validate(), но на всякий случай)
+                return ['success' => false, 'errors' => $model->getErrors()]; // Могут быть ошибки базы данных
+            }
+        } else {
+            // Ошибки валидации
+            return ['success' => false, 'errors' => $model->getErrors()];
+        }
+    }
+
+    /**
+     * Displays a single Selections model (user's collection).
+     * @param int $id Collection ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found or does not belong to the user
+     */
+    public function actionViewCollection($id)
+    {
+        $model = Selections::findOne(['id' => $id, 'user_id' => Yii::$app->user->id]);
+
+        if ($model === null) {
+            throw new NotFoundHttpException('The requested collection does not exist or you do not have permission to view it.');
+        }
+
+        // Здесь можно будет передать $dataProvider для объектов в подборке,
+        // когда будет реализована логика добавления/просмотра объектов
+        // $objectsDataProvider = new ActiveDataProvider([...]);
+
+        return $this->render('view-collection', [
+            'model' => $model,
+            // 'objectsDataProvider' => $objectsDataProvider,
+        ]);
     }
 }

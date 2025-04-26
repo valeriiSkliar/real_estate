@@ -406,6 +406,8 @@ class TelegramFlowHandler
     {
         if ($this->user->city_id) {
             $this->enterName();
+
+            return;
         }
 
         $buttons = $this->buttonService->getInlineButtons(null, [
@@ -467,6 +469,8 @@ class TelegramFlowHandler
     {
         if ($this->user->fio) {
             $this->sendEmailRequest();
+
+            return;
         }
 
         $textResponse = Texts::getLabel(BotTextKeys::ENTER_NAME->value);
@@ -503,8 +507,10 @@ class TelegramFlowHandler
      */
     private function sendEmailRequest(): void
     {
-        if (!$this->user->email) {
+        if ($this->user->email) {
             $this->enterPhone();
+
+            return;
         }
 
         $textResponse = Texts::getLabel(BotTextKeys::EMAIL_REQUEST->value);
@@ -551,6 +557,8 @@ class TelegramFlowHandler
     {
         if ($this->user->phone) {
             $this->start();
+
+            return;
         }
 
         $textResponse = Texts::getLabel(BotTextKeys::ENTER_PHONE->value);

@@ -3,20 +3,16 @@
 namespace app\controllers\admin;
 
 use app\controllers\admin\AdminController;
-use app\models\Selections;
-use app\models\search\SelectionsSearch;
+use app\models\Settings;
+use app\models\search\SettingsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use Yii;
-use yii\web\Response;
-use yii\helpers\Url;
-use yii\web\BadRequestHttpException;
 
 /**
- * SelectionsController implements the CRUD actions for Selections model.
+ * SettingsController implements the CRUD actions for Settings model.
  */
-class SelectionsController extends AdminController
+class SettingsController extends AdminController
 {
     /**
      * @inheritDoc
@@ -37,13 +33,13 @@ class SelectionsController extends AdminController
     }
 
     /**
-     * Lists all Selections models.
+     * Lists all Settings models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new SelectionsSearch();
+        $searchModel = new SettingsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -53,7 +49,7 @@ class SelectionsController extends AdminController
     }
 
     /**
-     * Displays a single Selections model.
+     * Displays a single Settings model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -66,17 +62,17 @@ class SelectionsController extends AdminController
     }
 
     /**
-     * Creates a new Selections model.
+     * Creates a new Settings model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Selections();
+        $model = new Settings();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect('index');
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -88,7 +84,7 @@ class SelectionsController extends AdminController
     }
 
     /**
-     * Updates an existing Selections model.
+     * Updates an existing Settings model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -99,7 +95,7 @@ class SelectionsController extends AdminController
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect('index');
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -108,7 +104,7 @@ class SelectionsController extends AdminController
     }
 
     /**
-     * Deletes an existing Selections model.
+     * Deletes an existing Settings model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -122,15 +118,15 @@ class SelectionsController extends AdminController
     }
 
     /**
-     * Finds the Selections model based on its primary key value.
+     * Finds the Settings model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Selections the loaded model
+     * @return Settings the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Selections::findOne(['id' => $id])) !== null) {
+        if (($model = Settings::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

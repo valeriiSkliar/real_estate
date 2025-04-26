@@ -126,7 +126,7 @@ class FavoritesListWidget extends Widget
         $view = $this->getView();
 
         // Регистрируем CSS
-        $view->registerCssFile('@web/css/favorites.css');
+        // $view->registerCssFile('@web/css/favorites.css');
 
         // Регистрируем JS
         $view->registerJsFile('@web/js/components/favorite-button.js', ['depends' => [\yii\web\JqueryAsset::class]]);

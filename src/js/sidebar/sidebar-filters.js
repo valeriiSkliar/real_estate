@@ -71,6 +71,11 @@ function initSidebarFilters() {
           if ($element.is(':radio')) {
             // Handle radio buttons
             $form.find('[name="' + key + '"][value="' + value + '"]').prop('checked', true);
+          } else if ($element.is(':checkbox')) {
+            // Handle checkboxes - check if value is 'true'
+            if (value === 'true') {
+              $element.prop('checked', true);
+            }
           } else {
             // Handle text inputs, selects, etc.
             $element.val(value);
@@ -80,6 +85,18 @@ function initSidebarFilters() {
     }
   }
   
+  // Handle new_for_today checkbox
+  $('#new-for-today').on('change', function() {
+    // When unchecked, remove the parameter from the form
+    if ($(this).is(':checked')) {
+      console.log('Checkbox unchecked');
+      $(this).prop('value', 'true');
+    } else {
+      console.log('Checkbox checked');
+      $(this).prop('value', 'false');
+    }
+  });
+    
   // Reset form
   $('#resetForm').on('click', function(e) {
     e.preventDefault();
@@ -115,7 +132,7 @@ function initSidebarFilters() {
     window.history.replaceState({}, '', newUrl);
   });
   
-  // Form submission - update URL with form parameters
+  //TODO Form submission - update URL with form parameters
   $('#sidebarFilterForm').on('submit', function(e) {
     e.preventDefault();
     
@@ -130,10 +147,9 @@ function initSidebarFilters() {
     
     // Clear all parameters except sort and search
     urlParams.forEach((value, key) => {
-      if (key !== 'sort' && key !== 'direction' && key !== 'q') {
-        urlParams.delete(key);
-      }
+      urlParams.delete(key);
     });
+    urlParams.delete('new_for_today')
     
     // Add form data to URL parameters
     formData.forEach(function(field) {
@@ -203,7 +219,7 @@ function initSidebarFilters() {
     }
   });
   
-  // Load district selector content via AJAX
+  //TODO Load district selector content via AJAX
   function loadDistrictSelector(modal) {
     // Set modal title
     $('#sharedModalLabel').text('Выберите район');
@@ -293,7 +309,7 @@ function initSidebarFilters() {
     }
   }
   
-  // Load complex search content
+  //TODO Load complex search content
   function loadComplexSearch(modal) {
     // Set modal title
     $('#sharedModalLabel').text('Поиск ЖК');
@@ -339,7 +355,7 @@ function initSidebarFilters() {
     }, 500);
   }
   
-  // Search complexes via AJAX
+  //TODO Search complexes via AJAX
   function searchComplexes() {
     const searchTerm = $('#complexSearchInput').val().trim();
     

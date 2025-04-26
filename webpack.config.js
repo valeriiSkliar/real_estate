@@ -11,7 +11,7 @@ const PATHS = {
 module.exports = {
     entry: {
         main: [`${PATHS.src}/js/main.js`],
-        mobileAds: `${PATHS.src}/js/mobile-advertisements.js`,
+        // mobileAds: `${PATHS.src}/js/mobile-advertisements.js`,
         style: [`${PATHS.src}/scss/style.scss`]
     },
     output: {
